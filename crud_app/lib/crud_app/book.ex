@@ -13,10 +13,12 @@ defmodule CrudApp.Library.Book do
     timestamps()
   end
 
+  # Função para validar e criar o livro
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :author, :year, :isbn])
-    |> validate_required([:title, :author, :year, :isbn])
-    |> validate_length(:isbn, is: 13) # ISBN deve ter 13 caracteres
+    |> validate_required([:title, :author])  # Validação para título e autor
+    |> validate_length(:isbn, is: 13)         # ISBN com 13 caracteres
+    |> unique_constraint(:isbn)              # Garantir que o ISBN é único
   end
 end

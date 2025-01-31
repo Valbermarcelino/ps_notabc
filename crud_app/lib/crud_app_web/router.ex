@@ -9,6 +9,15 @@ defmodule CrudAppWeb.Router do
     pipe_through :api
 
     resources "/books", BookController, except: [:new, :edit]
+
+    # Buscar livro por ISBN
+    get "/books/isbn/:isbn", BookController, :show_by_isbn
+
+    # Listar livros por autor
+    get "/books/author/:author", BookController, :list_by_author
+
+    # Atualizar o ano do livro
+    put "/books/:id/year", BookController, :update_year
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
